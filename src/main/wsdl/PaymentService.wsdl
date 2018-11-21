@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.easypay.payphone/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="PaymentService" targetNamespace="http://ws.easypay.payphone/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.easypay.payphone/" elementFormDefault="unqualified" targetNamespace="http://ws.easypay.payphone/" version="1.0">
+
+  <xs:element name="beginPayment" type="tns:beginPayment"/>
+
+  <xs:element name="beginPaymentResponse" type="tns:beginPaymentResponse"/>
+
+  <xs:element name="getPaymentMethods" type="tns:getPaymentMethods"/>
+
+  <xs:element name="getPaymentMethodsResponse" type="tns:getPaymentMethodsResponse"/>
+
+  <xs:element name="getPaymentStatus" type="tns:getPaymentStatus"/>
+
+  <xs:element name="getPaymentStatusResponse" type="tns:getPaymentStatusResponse"/>
+
+  <xs:complexType name="getPaymentMethods">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getPaymentMethodsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:paymentMethod"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="paymentMethod">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="beginPayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:paymentRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="paymentRequest">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="beginPaymentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPaymentStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPaymentStatusResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:paymentStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="paymentStatus">
+    <xs:sequence/>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getPaymentMethods">
+    <wsdl:part element="tns:getPaymentMethods" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="beginPayment">
+    <wsdl:part element="tns:beginPayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentStatus">
+    <wsdl:part element="tns:getPaymentStatus" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentMethodsResponse">
+    <wsdl:part element="tns:getPaymentMethodsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentStatusResponse">
+    <wsdl:part element="tns:getPaymentStatusResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="beginPaymentResponse">
+    <wsdl:part element="tns:beginPaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PaymentService">
+    <wsdl:operation name="getPaymentMethods">
+      <wsdl:input message="tns:getPaymentMethods" name="getPaymentMethods">
+    </wsdl:input>
+      <wsdl:output message="tns:getPaymentMethodsResponse" name="getPaymentMethodsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="beginPayment">
+      <wsdl:input message="tns:beginPayment" name="beginPayment">
+    </wsdl:input>
+      <wsdl:output message="tns:beginPaymentResponse" name="beginPaymentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentStatus">
+      <wsdl:input message="tns:getPaymentStatus" name="getPaymentStatus">
+    </wsdl:input>
+      <wsdl:output message="tns:getPaymentStatusResponse" name="getPaymentStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PaymentServiceSoapBinding" type="tns:PaymentService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getPaymentMethods">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPaymentMethods">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPaymentMethodsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="beginPayment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="beginPayment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="beginPaymentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPaymentStatus">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPaymentStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PaymentService">
+    <wsdl:port binding="tns:PaymentServiceSoapBinding" name="payment">
+      <soap:address location="http://172.17.0.2:8080/easypay/PaymentService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
