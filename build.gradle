@@ -1,15 +1,13 @@
 plugins {
-    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.10'
 
     id 'application'
 }
 
-mainClassName = 'App'
+mainClassName = 'payphone.easypay.client.App'
 
 dependencies {
-    compile 'com.google.guava:guava:23.0'
-
-    testCompile 'junit:junit:4.12'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.10'
 }
 
 repositories {
