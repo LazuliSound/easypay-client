@@ -14,6 +14,18 @@
 
   <xs:element name="getPaymentStatusResponse" type="tns:getPaymentStatusResponse"/>
 
+  <xs:element name="paymentFailExtra" type="tns:paymentFailExtra"/>
+
+  <xs:element name="paymentMethod" type="tns:paymentMethod"/>
+
+  <xs:element name="paymentOKExtra" type="tns:paymentOKExtra"/>
+
+  <xs:element name="paymentRequest" type="tns:paymentRequest"/>
+
+  <xs:element name="paymentStatus" type="tns:paymentStatus"/>
+
+  <xs:element name="pendingOpenURLExtra" type="tns:pendingOpenURLExtra"/>
+
   <xs:complexType name="getPaymentMethods">
     <xs:sequence/>
   </xs:complexType>
@@ -25,7 +37,10 @@
   </xs:complexType>
 
   <xs:complexType final="extension restriction" name="paymentMethod">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="paymentMethodId" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="beginPayment">
@@ -35,7 +50,10 @@
   </xs:complexType>
 
   <xs:complexType final="extension restriction" name="paymentRequest">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="paymentMethodId" type="xs:string"/>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="beginPaymentResponse">
@@ -57,8 +75,41 @@
   </xs:complexType>
 
   <xs:complexType final="extension restriction" name="paymentStatus">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="paymentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="tns:paymentStatusValue"/>
+      <xs:element minOccurs="0" name="pendingOpenUrlExtra" type="tns:pendingOpenURLExtra"/>
+      <xs:element minOccurs="0" name="okExtra" type="tns:paymentOKExtra"/>
+      <xs:element minOccurs="0" name="failExtra" type="tns:paymentFailExtra"/>
+    </xs:sequence>
   </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="pendingOpenURLExtra">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="url" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="paymentOKExtra">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="paymentFailExtra">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="reason" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="paymentStatusValue">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IN_PROGRESS"/>
+      <xs:enumeration value="PENDING_OPEN_URL"/>
+      <xs:enumeration value="OK"/>
+      <xs:enumeration value="FAIL"/>
+    </xs:restriction>
+  </xs:simpleType>
 
 </xs:schema>
   </wsdl:types>
@@ -138,7 +189,7 @@
   </wsdl:binding>
   <wsdl:service name="PaymentService">
     <wsdl:port binding="tns:PaymentServiceSoapBinding" name="payment">
-      <soap:address location="http://172.17.0.2:8080/easypay/PaymentService"/>
+      <soap:address location="http://167.205.35.211:8080/easypay/PaymentService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
