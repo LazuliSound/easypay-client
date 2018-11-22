@@ -29,5 +29,5 @@ task downloadWsdls(type: com.github.gmazzo.gradle.plugins.tasks.DownloadWSDL) {
         into 'src/main/wsdl'
         from 'http://167.205.35.211:8080/easypay/PaymentService?wsdl'
 
-        wsImport.dependsOn self
+        // wsImport.dependsOn self
 }
