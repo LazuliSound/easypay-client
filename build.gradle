@@ -31,3 +31,7 @@ task downloadWsdls(type: com.github.gmazzo.gradle.plugins.tasks.DownloadWSDL) {
 
         // wsImport.dependsOn self
 }
+
+run {
+    standardInput = System.in
+}
