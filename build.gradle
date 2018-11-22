@@ -19,6 +19,14 @@ repositories {
     jcenter()
 }
 
+compileJava {
+    options.compilerArgs += ["--add-modules", "java.xml.ws"]
+}
+
+run {
+    jvmArgs += ["--add-modules", "java.xml.ws"]
+}
+
 compileKotlin.dependsOn wsImport
 sourceSets {
     main.kotlin.srcDirs += "$buildDir/generated/jaxws/main/java"
