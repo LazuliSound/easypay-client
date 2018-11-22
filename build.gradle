@@ -19,6 +19,11 @@ repositories {
     jcenter()
 }
 
+compileKotlin.dependsOn wsImport
+sourceSets {
+    main.kotlin.srcDirs += "$buildDir/generated/jaxws/main/java"
+}
+
 task downloadWsdls(type: com.github.gmazzo.gradle.plugins.tasks.DownloadWSDL) {
     self ->
         into 'src/main/wsdl'
