@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://fake.service.easypay.payphone/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="FakeVaService" targetNamespace="http://fake.service.easypay.payphone/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://fake.service.easypay.payphone/" elementFormDefault="unqualified" targetNamespace="http://fake.service.easypay.payphone/" version="1.0">
+
+            <xs:element name="beginVaPayment" type="tns:beginVaPayment"/>
+
+            <xs:element name="beginVaPaymentResponse" type="tns:beginVaPaymentResponse"/>
+
+            <xs:element name="vaRequest" type="tns:vaRequest"/>
+
+            <xs:complexType name="beginVaPayment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:vaRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType final="extension restriction" name="vaRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="callbackURL" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="beginVaPaymentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="beginVaPayment">
+        <wsdl:part element="tns:beginVaPayment" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="beginVaPaymentResponse">
+        <wsdl:part element="tns:beginVaPaymentResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="FakeVaService">
+        <wsdl:operation name="beginVaPayment">
+            <wsdl:input message="tns:beginVaPayment" name="beginVaPayment">
+            </wsdl:input>
+            <wsdl:output message="tns:beginVaPaymentResponse" name="beginVaPaymentResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FakeVaServiceSoapBinding" type="tns:FakeVaService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="beginVaPayment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="beginVaPayment">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="beginVaPaymentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="FakeVaService">
+        <wsdl:port binding="tns:FakeVaServiceSoapBinding" name="fakeVa">
+            <soap:address location="http://167.205.35.211:8080/easypay/FakeVaService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
