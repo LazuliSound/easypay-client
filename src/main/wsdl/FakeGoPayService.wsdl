@@ -2,9 +2,9 @@
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://fake.service.easypay.payphone/" elementFormDefault="unqualified" targetNamespace="http://fake.service.easypay.payphone/" version="1.0">
 
-            <xs:element name="beginPayment" type="tns:beginPayment"/>
+            <xs:element name="begingopayPayment" type="tns:begingopayPayment"/>
 
-            <xs:element name="beginPaymentResponse" type="tns:beginPaymentResponse"/>
+            <xs:element name="begingopayPaymentResponse" type="tns:begingopayPaymentResponse"/>
 
             <!--xs:element name="getPaymentMethods" type="tns:getPaymentMethods"/-->
 
@@ -43,7 +43,7 @@
                 </xs:sequence>
             </xs:complexType-->
 
-            <xs:complexType name="beginPayment">
+            <xs:complexType name="begingopayPayment">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="arg0" type="tns:goPayRequest"/>
                 </xs:sequence>
@@ -57,7 +57,7 @@
                 </xs:sequence>
             </xs:complexType>
 
-            <xs:complexType name="beginPaymentResponse">
+            <xs:complexType name="begingopayPaymentResponse">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="return" type="xs:string"/>
                 </xs:sequence>
@@ -118,8 +118,8 @@
         <wsdl:part element="tns:getPaymentMethods" name="parameters">
         </wsdl:part>
     </wsdl:message-->
-    <wsdl:message name="beginPayment">
-        <wsdl:part element="tns:beginPayment" name="parameters">
+    <wsdl:message name="begingopayPayment">
+        <wsdl:part element="tns:begingopayPayment" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <!--wsdl:message name="getPaymentStatus">
@@ -134,8 +134,8 @@
         <wsdl:part element="tns:getPaymentStatusResponse" name="parameters">
         </wsdl:part>
     </wsdl:message-->
-    <wsdl:message name="beginPaymentResponse">
-        <wsdl:part element="tns:beginPaymentResponse" name="parameters">
+    <wsdl:message name="begingopayPaymentResponse">
+        <wsdl:part element="tns:begingopayPaymentResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:portType name="FakeGoPayService">
@@ -145,10 +145,10 @@
             <wsdl:output message="tns:getPaymentMethodsResponse" name="getPaymentMethodsResponse">
             </wsdl:output>
         </wsdl:operation-->
-        <wsdl:operation name="beginPayment">
-            <wsdl:input message="tns:beginPayment" name="beginPayment">
+        <wsdl:operation name="begingopayPayment">
+            <wsdl:input message="tns:begingopayPayment" name="begingopayPayment">
             </wsdl:input>
-            <wsdl:output message="tns:beginPaymentResponse" name="beginPaymentResponse">
+            <wsdl:output message="tns:begingopayPaymentResponse" name="begingopayPaymentResponse">
             </wsdl:output>
         </wsdl:operation>
         <!--wsdl:operation name="getPaymentStatus">
@@ -169,12 +169,12 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation-->
-        <wsdl:operation name="beginPayment">
+        <wsdl:operation name="begingopayPayment">
             <soap:operation soapAction="" style="document"/>
-            <wsdl:input name="beginPayment">
+            <wsdl:input name="begingopayPayment">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="beginPaymentResponse">
+            <wsdl:output name="begingopayPaymentResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
