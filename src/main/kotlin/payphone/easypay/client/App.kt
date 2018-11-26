@@ -1,8 +1,8 @@
 package payphone.easypay.client
 
-import payphone.easypay.ws.PaymentRequest
-import payphone.easypay.ws.PaymentService
-import payphone.easypay.ws.PaymentStatusValue
+import payphone.easypay.core.ws.PaymentEventType
+import payphone.easypay.core.ws.PaymentRequest
+import payphone.easypay.core.ws.PaymentService
 import java.net.URL
 import javax.xml.namespace.QName
 import javax.xml.ws.Service
@@ -15,7 +15,7 @@ object App {
         println()
 
         val url = URL("http://localhost:9080/PaymentService.wsdl")
-        val qname = QName("http://ws.easypay.payphone/", "PaymentService")
+        val qname = QName("http://ws.core.easypay.payphone/", "PaymentService")
 
         val service = Service.create(url, qname)
         println("Service is created.")
@@ -50,27 +50,38 @@ object App {
 
         // Payment status.
 
+        var lastEventId: Long? = null
+
         loop@ while (true) {
             Thread.sleep(1000)
-            val status = api.getPaymentStatus(paymentId)
 
-            when (status.status!!) {
-                PaymentStatusValue.IN_PROGRESS ->
-                    println("Status: In Progress")
+            val eventsBlock = api.getPaymentEvents(paymentId, lastEventId)
+            val events = eventsBlock.events
 
-                PaymentStatusValue.PENDING_OPEN_URL ->
-                    println("Status: Pending: Open URL: ${status.pendingOpenUrlExtra!!.url}")
+            println("EventBlock: len = ${events.size}, lastEventId = ${eventsBlock.lastEventId}")
 
-                PaymentStatusValue.OK -> {
-                    println("Status: OK, amount = ${status.okExtra!!.amount}")
-                    break@loop
-                }
+            for (event in events) {
+                when (event.type!!) {
+                    PaymentEventType.OPEN_URL ->
+                        println("Event: OPEN_URL, url = ${event.urlToOpen}")
 
-                PaymentStatusValue.FAIL -> {
-                    println("Status: FAIL: ${status.failExtra!!.reason}")
-                    break@loop
+                    PaymentEventType.AMOUNT_CHANGED ->
+                        println("Event: AMOUNT_CHANGED, amount = ${event.amount}")
+
+                    PaymentEventType.SUCCESS -> {
+                        println("Event: SUCCESS, amount = ${event.amount}")
+                        break@loop
+                    }
+
+                    PaymentEventType.FAILURE -> {
+                        println("Event: FAILURE, reason = ${event.reason}")
+                        break@loop
+                    }
+
                 }
             }
+
+            lastEventId = eventsBlock.lastEventId
         }
     }
 }
