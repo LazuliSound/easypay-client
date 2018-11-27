@@ -68,6 +68,9 @@ object App {
                     PaymentEventType.AMOUNT_CHANGED ->
                         println("Event: AMOUNT_CHANGED, amount = ${event.amount}")
 
+                    PaymentEventType.ACCOUNT_NUMBER_AVAILABLE ->
+                        println("Event: ACCOUNT_NUMBER_AVAILABLE, accNum = ${event.accountNumber}")
+
                     PaymentEventType.SUCCESS -> {
                         println("Event: SUCCESS, amount = ${event.amount}")
                         break@loop
@@ -77,7 +80,6 @@ object App {
                         println("Event: FAILURE, reason = ${event.reason}")
                         break@loop
                     }
-
                 }
             }
 

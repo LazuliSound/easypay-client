@@ -49,6 +49,7 @@
     <xs:attribute name="amount" type="xs:decimal"/>
     <xs:attribute name="reason" type="xs:string"/>
     <xs:attribute name="urlToOpen" type="xs:string"/>
+    <xs:attribute name="accountNumber" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="getPaymentMethods">
@@ -92,6 +93,7 @@
       <xs:enumeration value="FAILURE"/>
       <xs:enumeration value="OPEN_URL"/>
       <xs:enumeration value="AMOUNT_CHANGED"/>
+      <xs:enumeration value="ACCOUNT_NUMBER_AVAILABLE"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -173,7 +175,7 @@
   </wsdl:binding>
   <wsdl:service name="PaymentService">
     <wsdl:port binding="tns:PaymentServiceSoapBinding" name="payment">
-      <soap:address location="http://167.205.34.232:8080/easypay/PaymentService/PaymentService"/>
+      <soap:address location="http://167.205.35.211:8080/easypay/PaymentService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
