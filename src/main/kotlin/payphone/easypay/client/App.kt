@@ -14,7 +14,7 @@ object App {
         println("Easypay by Payphone")
         println()
 
-        val url = URL("http://localhost:9080/PaymentService.wsdl")
+        val url = URL("http://167.205.35.211:8080/easypay/PaymentService?wsdl")
         val qname = QName("http://ws.core.easypay.payphone/", "PaymentService")
 
         val service = Service.create(url, qname)
