@@ -1,7 +1,6 @@
 package payphone.easypay.client
 
 import payphone.easypay.core.ws.PaymentEventType
-import payphone.easypay.core.ws.PaymentRequest
 import payphone.easypay.core.ws.PaymentService
 import java.net.URL
 import javax.xml.namespace.QName
@@ -34,18 +33,18 @@ object App {
 
         // Payment request.
 
-        val request = PaymentRequest()
+
 
         print("Payment Method ID: ")
-        request.paymentMethodId = readLine()!!
+        val paymentMethodId = readLine()!!
         print("Amount: ")
-        request.amount = readLine()!!.toBigDecimal()
+        val amount = readLine()!!.toBigDecimal()
 
         println()
 
         // Begin payment.
 
-        val paymentId = api.beginPayment(request)
+        val paymentId = api.beginPayment(paymentMethodId, amount)
         println("Payment process has been started, ID = $paymentId")
 
         // Payment status.

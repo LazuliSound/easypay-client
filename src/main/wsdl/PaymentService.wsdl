@@ -20,12 +20,10 @@
 
   <xs:element name="paymentMethod" type="tns:paymentMethod"/>
 
-  <xs:element name="paymentRequest" type="tns:paymentRequest"/>
-
   <xs:complexType name="getPaymentEvents">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-      <xs:element minOccurs="0" name="arg1" type="xs:long"/>
+      <xs:element minOccurs="0" name="paymentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastEventId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -71,14 +69,9 @@
 
   <xs:complexType name="beginPayment">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:paymentRequest"/>
+      <xs:element minOccurs="0" name="paymentMethodId" type="xs:string"/>
+      <xs:element minOccurs="0" name="amount" type="xs:decimal"/>
     </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType final="extension restriction" name="paymentRequest">
-    <xs:sequence/>
-    <xs:attribute name="paymentMethodId" type="xs:string"/>
-    <xs:attribute name="amount" type="xs:decimal"/>
   </xs:complexType>
 
   <xs:complexType name="beginPaymentResponse">
