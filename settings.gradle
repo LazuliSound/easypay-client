@@ -8,3 +8,5 @@
  */
 
 rootProject.name = 'easypay-client'
+
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
